@@ -10,12 +10,17 @@ bot.on('ready', function (){
   .catch(console.error)
   })
 bot.on('guildMemberAdd', function(member){
-	let argsRole = member.guild.roles.find(role => role.name === 'user')
-	member.addRole('520481838288863232')
 	member.createDM().then(function (channel){
 		return channel.send('Bienvenu sur le serveur '+ member.displayName)
 	})
-
-
 })
- bot.login(process.env.TOKEN)
+ bot.on('message', function(message){
+    if(message.content.startsWith("!help")) {
+    	let args = message.content.split(' ')
+    	args.shift()
+        message.channel.send("@here , "+ message.author.username+" a besoin d'aide sur ce sujet : "+args.join(' '));
+ 		
+
+ 	}
+ })
+ bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.DxcePg.yRNGoMc1-SF4BCumedw_hqzjgsM')
