@@ -1,7 +1,6 @@
 {
-  "name": "CollegeBot",
-  "version": "1.0.0",
-  "main": "index.js"
+  "name": "",
+  "version": "",
   "dependencies": {
     "discord.js": "^11.4.2"
   }
