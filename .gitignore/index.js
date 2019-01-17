@@ -20,7 +20,7 @@ bot.on('guildMemberAdd', function(member){
    	 if(message.content.startsWith(prefix+"aide")) {
     		let args = message.content.split(' ')
     		args.shift()
-       		return message.channel.send("@here , "+ message.author.username+" a besoin d'aide sur ce sujet : "+args.join(' ')+". Il se trouve dans le channel : "+message.channel.name);
+       	return message.channel.send("@here , "+ message.author.username+" a besoin d'aide sur ce sujet : "+args.join(' ')+". Il se trouve dans le channel : "+message.channel.name);
  		
 
  		}
@@ -35,24 +35,33 @@ bot.on('guildMemberAdd', function(member){
  	 	  .setAuthor('Collège Louis Pasteur (15)',message.client.user.avatarURL)
  	 	  .setTitle('Les commandes du serveur')
  	 	  .setColor('#FFFFFF')
- 	 	  .setDescription("- !aide <message> Sert à notifier tout les membres présents avec votre message (A utiliser en cas de véritable besoin d'aide)\n - !ping Donne votre ping en milliseconde\n - !ressource Permet d'obtenir le lien vers les ressources.");
+      .addField('!aide', "Sert à notifier tout les membres présents avec votre message (A utiliser en cas de véritable besoin d'aide)")
+      .addField('!ping', "Donne votre ping en milliseconde")
+      .addField('!ressources', "Permet d'obtenir le lien vers les ressources.")
+      .addField('!infos', "Donne des informations sur le bot et le serveur Discord.")
+ 	 	  
  	 	return message.channel.send(embed)
  	 	
  	 }
- 	 if(message.content === prefix+'ressource'){
+ 	 if(message.content === prefix+'ressources'){
  	 	return message.channel.send('Voici le lien vers les ressources : https://bit.ly/2Me3Mn6')
  	 
  	 }
  	 if(message.content === prefix+'infos'){
+    let URL = message.author.avatarURL
+    let name = message.author.tag
  	 	let size = message.client.users.size
- 	 	size = size-1
+ 	 	size = size-2
+    let connectés = message.guild.members.filter(({ presence }) => presence.status !== 'offline').size;
+
  	 	const embed = new Discord.RichEmbed()
- 	 	  .setAuthor('Collège Louis Pasteur (15)',message.client.user.avatarURL)
+ 	 	  .setAuthor('Collège Louis Pasteur (15)',message.author.avatarURL)
  	 	  .addField('Langage de programmation :', 'NodeJS')
- 	 	  .addField('Bibliothèque :', 'discord.js')
+ 	 	  .addField('Bibliothèque :', 'discord.js 11.4.2')
  	 	  .addField('Version du bot :', '1.0.0')
- 	 	  .addField('Nombre de personne sur le serveur :', size)
+ 	 	  .addField('Nombre de personnes connectés :', connectés+' / '+size)
  	 	  .addField('Développeur :', "Mr_gaming_15#6367")
+      .addField('Demander par :', name)
  	 	  .setColor('#0000ff')
  	 	message.channel.send(embed)
  	 }
@@ -68,4 +77,4 @@ bot.on('guildMemberAdd', function(member){
  	
  }
  })
- bot.login(process.env.TOKEN) 	
+ bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.DyI_-Q.4NQJZk2lX-3vFXES1CbGS42r3EU') 	
