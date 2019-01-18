@@ -35,10 +35,11 @@ bot.on('guildMemberAdd', function(member){
  	 	  .setAuthor('Collège Louis Pasteur (15)',message.client.user.avatarURL)
  	 	  .setTitle('Les commandes du serveur')
  	 	  .setColor('#FFFFFF')
-      .addField('!aide', "Sert à notifier tout les membres présents avec votre message (A utiliser en cas de véritable besoin d'aide)")
+      .addField('!aide <message>', "Sert à notifier tout les membres présents avec votre message (A utiliser en cas de véritable besoin d'aide)")
       .addField('!ping', "Donne votre ping en milliseconde")
       .addField('!ressources', "Permet d'obtenir le lien vers les ressources.")
       .addField('!infos', "Donne des informations sur le bot et le serveur Discord.")
+      .addField('!event <message>','notifie tout les membres présents avec le massage écrit en gras et souligné (utilisable uniquement par les professeur et les modérateurs)' )
  	 	  
  	 	return message.channel.send(embed)
  	 	
@@ -90,4 +91,4 @@ bot.on('guildMemberAdd', function(member){
  	
  }
  })
- bot.login(process.env.TOKEN) 	
+ bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.DyMA3g.LWkQ_yYCt9_9g2wSB6HT-dkPG5Y') 	
