@@ -53,7 +53,6 @@ bot.on('guildMemberAdd', function(member){
  	 	let size = message.client.users.size
  	 	size = size-2
     let connectés = message.guild.members.filter(({ presence }) => presence.status !== 'offline').size;
-
  	 	const embed = new Discord.RichEmbed()
  	 	  .setAuthor('Collège Louis Pasteur (15)',message.author.avatarURL)
  	 	  .addField('Langage de programmation :', 'NodeJS')
@@ -62,11 +61,25 @@ bot.on('guildMemberAdd', function(member){
  	 	  .addField('Nombre de personnes connectés :', connectés+' / '+size)
  	 	  .addField('Développeur :', "Mr_gaming_15#6367")
       .addField('Demander par :', name)
- 	 	  .setColor('#0000ff')
+ 	 	  .setColor('#00ffff')
  	 	message.channel.send(embed)
+    
  	 }
+   if(message.content.startsWith('!event')){
+    let role = message.guild.roles.find(role => role.name === 'Professeur')
+    let role2 = message.guild.roles.find(role => role.name === 'Modérateur')
+    if(message.member.roles.has(role.id) || message.member.roles.has(role2.id)){
+      let args = message.content.split(' ')
+      args.shift()
+      return message.channel.send('@here, __**'+args.join(' ')+'**__')
+    }
+    if(!message.member.roles.has(role.id) || !message.member.roles.has(role2.id)){
+      return message.reply("Tu n'as pas le droit d'utiliser cette commande !")
+    }
+   }
+
  	 else{
- 	 	message.channel.send("Je n'ai pas compris :thinking:. Tapez !help pour plus d'information.")
+ 	 	message.channel.send("Je n'ai pas compris :thinking:. Tapez `!help` pour plus d'information.")
  	 }
  	 
 
@@ -77,4 +90,4 @@ bot.on('guildMemberAdd', function(member){
  	
  }
  })
- bot.login(process.env.TOKEN) 	
+ bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.DyL2HQ.MkpROVBdupwuiufHtTQjdesJNmc') 	
