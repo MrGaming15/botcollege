@@ -92,4 +92,4 @@ bot.on('guildMemberAdd', function(member){
  	
  }
  })
- bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.DyRlmQ.ud6DdbbWr2GMyCwNHS0QOIPgElg') 	
+ bot.login(process.env.TOKEN) 	
