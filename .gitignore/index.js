@@ -20,7 +20,7 @@ bot.on('guildMemberAdd', function(member){
    	 if(message.content.startsWith(prefix+"aide")) {
     		let args = message.content.split(' ')
     		args.shift()
-       	return message.channel.send("@here , "+ message.author.username+" a besoin d'aide sur ce sujet : "+args.join(' ')+". Il se trouve dans le channel : "+message.channel.name);
+       	return message.channel.send("@here , "+ message.author.username+" a besoin d'aide sur ce sujet : "+args.join(' '));
  		
 
  		}
@@ -53,17 +53,18 @@ bot.on('guildMemberAdd', function(member){
     let name = message.author.tag
  	 	let size = message.client.users.size
  	 	size = size-2
-    let connectés = message.guild.members.filter(({ presence }) => presence.status !== 'offline').size;
+    	let connectés = message.guild.members.filter(({ presence }) => presence.status !== 'offline').size;
+    	connectés = connectés - 1
  	 	const embed = new Discord.RichEmbed()
- 	 	  .setAuthor('Collège Louis Pasteur (15)',message.author.avatarURL)
+ 	 	  .setAuthor('Collège Louis Pasteur (15)',message.client.user.avatarURL)
  	 	  .addField('Langage de programmation :', 'NodeJS')
  	 	  .addField('Bibliothèque :', 'discord.js 11.4.2')
  	 	  .addField('Version du bot :', '1.0.0')
  	 	  .addField('Nombre de personnes connectés :', connectés+' / '+size)
  	 	  .addField('Développeur :', "Mr_gaming_15#6367")
-      .addField('Demander par :', name)
+          .addField('Demander par :', name)
  	 	  .setColor('#00ffff')
- 	 	message.channel.send(embed)
+ 	 	return message.channel.send(embed)
     
  	 }
    if(message.content.startsWith('!event')){
@@ -91,4 +92,4 @@ bot.on('guildMemberAdd', function(member){
  	
  }
  })
- bot.login(process.env.TOKEN) 	
+ bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.DyRlmQ.ud6DdbbWr2GMyCwNHS0QOIPgElg') 	
