@@ -40,7 +40,7 @@ bot.on('guildMemberAdd', function(member){
       .addField('!ressources', "Permet d'obtenir le lien vers les ressources.")
       .addField('!infos', "Donne des informations sur le bot et le serveur Discord.")
       .addField('!event <message>','notifie tout les membres présents avec le massage écrit en gras et souligné (utilisable uniquement par les professeur et les modérateurs)' )
- 	 	  
+ 	  .addField("!salons","Vous permet de voir les utilités des salons et catégories")
  	 	return message.channel.send(embed)
  	 	
  	 }
@@ -79,6 +79,24 @@ bot.on('guildMemberAdd', function(member){
       return message.reply("Tu n'as pas le droit d'utiliser cette commande !")
     }
    }
+    if(message.content === prefix+'salons'){
+    	const embed = new Discord.RichEmbed()
+    	  .setAuthor('Collège Louis Pasteur (15)',message.client.user.avatarURL)
+    	  .setTitle('Utilité des salons')
+    	  .addField('Régles', 'Salon où se trouve les régles du serveur.')
+    	  .addField('vos-questions', 'Salon où vous pouvez poser vos questions')
+    	  .addField('salle-du-bot', 'Salon où vous pouvez utiliser le "Pasteur Bot" ')
+    	  .addField('Reports-de-bugs', 'Si vous trouvez un bug dans un des bots merci de le renseigné ici')
+    	  .addField('Idées', 'Salon où vous pouvez nous donner vos Idées')
+    	  .addField("Catégories relative au classes (6e, 5e, 4e, 3e)","Ces catégories sont là pour vous aider dans vos cours et devoirs, et son là pour développer l'entre-aide entre les élèves")
+    	  .addField("Catégorie détente", "Cette catégorie est là pour que vous puissiez vous détendre, écouter de la musique, parler en vocal lors d'une partie de jeu vidéo")
+    	  .addField("détente", "Les salons détente sont là pour que vous puissiez vous détendre et discuter entre vous")
+    	  .addField("Gamer Zone","Ces salons sont là pour que les personnes voulant jouer en équipe au jeux vidéos puissent discuter")
+    	  .addField("Musique", "Ces salons sont là pour que vous puissiez écouter de la musique.")
+    	  .addField("Report", "Ce salon vous permet de reporter les membres qui ne respectent pas les régles")
+    	  .addField("Demandé par : ", message.author.tag)
+    	message.channel.send(embed)
+    }
 
  	 else{
  	 	message.channel.send("Je n'ai pas compris :thinking:. Tapez `!help` pour plus d'information.")
@@ -92,4 +110,4 @@ bot.on('guildMemberAdd', function(member){
  	
  }
  })
- bot.login(process.env.TOKEN) 	
+ bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.DyXOKQ.3lZVci32S3TOnxH7xcjEDesNg00') 	
