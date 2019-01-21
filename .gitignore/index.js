@@ -52,9 +52,9 @@ bot.on('guildMemberAdd', function(member){
     let URL = message.author.avatarURL
     let name = message.author.tag
  	 	let size = message.client.users.size
- 	 	size = size-2
+ 	 	size = size-3
     	let connectés = message.guild.members.filter(({ presence }) => presence.status !== 'offline').size;
-    	connectés = connectés - 1
+    	connectés = connectés - 2
  	 	const embed = new Discord.RichEmbed()
  	 	  .setAuthor('Collège Louis Pasteur (15)',message.client.user.avatarURL)
  	 	  .addField('Langage de programmation :', 'NodeJS')
@@ -110,4 +110,4 @@ bot.on('guildMemberAdd', function(member){
  	
  }
  })
- bot.login(process.env.TOKEN) 	
+ bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.DybuiQ.9TNoj4Y2UrFEVcrcKGWE9XoWd2w') 	
