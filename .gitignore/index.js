@@ -41,6 +41,7 @@ bot.on('guildMemberAdd', function(member){
       .addField('!infos', "Donne des informations sur le bot et le serveur Discord.")
       .addField('!event <message>','notifie tout les membres présents avec le massage écrit en gras et souligné (utilisable uniquement par les professeur et les modérateurs)' )
  	  .addField("!salons","Vous permet de voir les utilités des salons et catégories")
+ 	  .addField('!warn <pseudo>','Avertie un utilisateur de sa mauvaise conduite (résérvé au Modérateurs, Administrateurs et Professeurs)')
  	 	return message.channel.send(embed)
  	 	
  	 }
@@ -127,4 +128,4 @@ bot.on('guildMemberAdd', function(member){
  	
  }
  })
- bot.login(process.env.TOKEN) 	
+ bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.DyeZuA.nnLF3ymeVIKbIN-YxVkyAclzoQM') 	
