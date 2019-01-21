@@ -96,6 +96,23 @@ bot.on('guildMemberAdd', function(member){
     	  .addField("Report", "Ce salon vous permet de reporter les membres qui ne respectent pas les régles")
     	  .addField("Demandé par : ", message.author.tag)
     	message.channel.send(embed)
+    }if(message.content.startsWith(prefix+'warn')){
+
+    	let role = message.guild.roles.find(role => role.name === 'Professeur')
+    	let role2 = message.guild.roles.find(role => role.name === 'Modérateur')
+    		if(message.member.roles.has(role.id) || message.member.roles.has(role2.id)){
+    			const args = message.content.slice(prefix.length).split(' ');
+				const command = args.shift().toLowerCase();
+    			
+
+
+    			message.channel.send('@here, **'+message.author.username+'** a averti **'+args[0]+'**')
+
+
+    		}
+    		else{
+    		message.reply("Vous n'avez pas la permission d'effectuer cette commande")
+    		}
     }
 
  	 else{
@@ -110,4 +127,4 @@ bot.on('guildMemberAdd', function(member){
  	
  }
  })
- bot.login(process.env.TOKEN) 	
+ bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.DyeILw.FJlkpc-J4YAccR9muV_G_-1oddc') 	
