@@ -128,4 +128,4 @@ bot.on('guildMemberAdd', function(member){
  	
  }
  })
- bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.DyeZuA.nnLF3ymeVIKbIN-YxVkyAclzoQM') 	
+ bot.login(process.env.TOKEN) 	
