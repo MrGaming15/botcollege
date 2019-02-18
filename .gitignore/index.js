@@ -182,4 +182,4 @@ bot.on('message', function(message){
  fs.writeFile("./xp.json", JSON.stringify(xp), (err)=>
       console.log(err))
  })
- bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.D0lW3w.0t4WYiorEL80AU_VJZ6z6AmtQv4') 	
+ bot.login(process.env.TOKEN) 	
