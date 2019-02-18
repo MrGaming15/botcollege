@@ -1,7 +1,11 @@
 const Discord = require('discord.js')
 const bot = new Discord.Client()
 let prefix = '!'
+const fs = require('fs')
+let xp = require('./xp.json')
+
 bot.on('ready', function (){
+  console.log("I'm ready !")
 	bot.user.setActivity('!help', { type: 'LISTENING' })
   .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : 'none'}`))
   .catch(console.error);
@@ -14,9 +18,64 @@ bot.on('guildMemberAdd', function(member){
 		return channel.send('Bienvenue sur le serveur '+ member.displayName)
 	})
 })
- bot.on('message', function(message){
+bot.on('message', function(message){
+  if(message.author.tag === 'dabBot#0563' || message.author.tag === 'Pasteur Bot#6999') return;
+  xpAdd = Math.floor(Math.random()*7)+8;
+  console.log(xpAdd);
+  if(!xp[message.author.tag]){
+    xp[message.author.tag] = {
+      xp : 0,
+      level : 1
+    }
+  };
+   
+  let curxp = xp[message.author.tag].xp;
+  let curlvl = xp[message.author.tag].level;
+  xp[message.author.tag].xp = curxp + xpAdd
+  let nxtLvl= xp[message.author.tag].level*300;
+  if(nxtLvl <= xp[message.author.tag].xp){
+    xp[message.author.tag].level = curlvl + 1
+    lvlUP = new Discord.RichEmbed()
+        .setTitle('Niveau '+xp[message.author.tag].level+' passé pour '+message.author.username+' !')
+      message.channel.send(lvlUP)
+  }
  	if (message.content.startsWith(prefix)) {
+   if(message.channel.id != '536202755312713749' && message.channel.id != '536963087543304232' && message.channel.id != '536789464068915222'){
+    return console.log('check !')
+   }
  	 if (!message.guild)return;
+     if(message.content.startsWith('!xp')){
+    let args = message.content.split(' ')
+    let role = message.guild.roles.find(role => role.name === 'Professeur')
+      let role2 = message.guild.roles.find(role => role.name === 'Modérateur')
+      if(message.member.roles.has(role.id) || message.member.roles.has(role2.id)){
+        if(args[1]==='reset'){
+          let y=args[2].split('&')
+          if(!xp[y]){
+              message.reply("Le nom saisis n'est pas valide. N'oubliez pas de remplacer les epace par des "+'"&"'+' .')
+          }
+          else{
+            xp[y.join(' ')] = {
+            xp : 0,
+            level : 1
+
+          }
+          message.channel.send(y+" n'a plus d'xp :cry:")
+    }
+        }
+      }
+    if(args[1] === 'show'){
+      let x = args[2].split('&')
+      let y = x.join(' ')
+      if(!xp[y]){
+        message.reply("Le nom que vous avez saisis n'est pas valide. N'oubliez pas de remplacer les espaces par des "+'"&"'+". ")
+
+      }else{
+        message.channel.send(y+' a '+xp[y].xp+"/"+300*xp[y].level+' xp au niveau '+xp[y].level+' !')
+      }
+
+    }
+  }
    	 if(message.content.startsWith(prefix+"aide")) {
     		let args = message.content.split(' ')
     		args.shift()
@@ -35,13 +94,15 @@ bot.on('guildMemberAdd', function(member){
  	 	  .setAuthor('Collège Louis Pasteur (15)',message.client.user.avatarURL)
  	 	  .setTitle('Les commandes du serveur')
  	 	  .setColor('#FFFFFF')
-      .addField('!aide <message>', "Sert à notifier tout les membres présents avec votre message (A utiliser en cas de véritable besoin d'aide)")
-      .addField('!ping', "Donne votre ping en milliseconde")
-      .addField('!ressources', "Permet d'obtenir le lien vers les ressources.")
-      .addField('!infos', "Donne des informations sur le bot et le serveur Discord.")
-      .addField('!event <message>','notifie tout les membres présents avec le massage écrit en gras et souligné (utilisable uniquement par les professeur et les modérateurs)' )
- 	  .addField("!salons","Vous permet de voir les utilités des salons et catégories")
- 	  .addField('!warn <pseudo>','Avertie un utilisateur de sa mauvaise conduite (résérvé au Modérateurs, Administrateurs et Professeurs)')
+      	  .addField('!aide <message>', "Sert à notifier tout les membres présents avec votre message (A utiliser en cas de véritable besoin d'aide)")
+      	  .addField('!ping', "Donne votre ping en milliseconde")
+      	  .addField('!ressources', "Permet d'obtenir le lien vers les ressources.")
+      	  .addField('!infos', "Donne des informations sur le bot et le serveur Discord.")
+      	  .addField('!event <message>','notifie tout les membres présents avec le massage écrit en gras et souligné (utilisable uniquement par les professeur et les modérateurs)' )
+ 	  	    .addField("!salons","Vous permet de voir les utilités des salons et catégories")
+ 	  	    .addField('!warn <pseudo>','Avertie un utilisateur de sa mauvaise conduite (résérvé au Modérateurs, Administrateurs et Professeurs)')
+          .addField("!xp show <tag>","Permet d'afficher l'xp et le niveau du joueur à qui appartient le tag. Il faut remplacer les espaces par des "+'"&"'+". ")
+          .addField("!xp reset <tag>","Permet de supprimer l'xp et les niveaux d'une personne. Il faut remplecer les especes par des "+'"&"'+". ")
  	 	return message.channel.send(embed)
  	 	
  	 }
@@ -115,17 +176,10 @@ bot.on('guildMemberAdd', function(member){
     		message.reply("Vous n'avez pas la permission d'effectuer cette commande")
     		}
     }
-
- 	 else{
- 	 	message.channel.send("Je n'ai pas compris :thinking:. Tapez `!help` pour plus d'information.")
- 	 }
- 	 
-
- 	 
- 	 
- 	 	 
- 	 	 
+ 
  	
  }
+ fs.writeFile("./xp.json", JSON.stringify(xp), (err)=>
+      console.log(err))
  })
- bot.login(process.env.TOKEN) 	
+ bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.D0lW3w.0t4WYiorEL80AU_VJZ6z6AmtQv4') 	
