@@ -19,6 +19,7 @@ bot.on('guildMemberAdd', function(member){
 	})
 })
 bot.on('message', function(message){
+  if (!message.guild)return;
   if(message.author.tag === 'dabBot#0563' || message.author.tag === 'Pasteur Bot#6999') return;
   xpAdd = Math.floor(Math.random()*7)+8;
   console.log(xpAdd);
@@ -43,7 +44,7 @@ bot.on('message', function(message){
    if(message.channel.id != '536202755312713749' && message.channel.id != '536963087543304232' && message.channel.id != '536789464068915222'){
     return console.log('check !')
    }
- 	 if (!message.guild)return;
+ 	 
      if(message.content.startsWith('!xp')){
     let args = message.content.split(' ')
     let role = message.guild.roles.find(role => role.name === 'Professeur')
