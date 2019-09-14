@@ -3,6 +3,8 @@ const bot = new Discord.Client()
 let prefix = '!'
 const fs = require('fs')
 let xp = require('./xp.json')
+let convert = require('./convert.json')
+let compteur = 0
 
 bot.on('ready', function (){
   console.log("I'm ready !")
@@ -23,57 +25,61 @@ bot.on('message', function(message){
   if(message.author.tag === 'dabBot#0563' || message.author.tag === 'Pasteur Bot#6999') return;
   xpAdd = Math.floor(Math.random()*7)+8;
   console.log(xpAdd);
-  if(!xp[message.author.tag]){
-    xp[message.author.tag] = {
+  if(!xp.count){
+  	xp.count = 0
+  }
+  if(!convert[message.author.username]){
+  	let count = xp.count
+    xp[count] = {
       xp : 0,
-      level : 1
+      level : 1,
+      count : xp.count,
+      username : message.author.username
     }
+    convert[message.author.username] = {
+    	number : xp.count
+    }
+    xp.count = xp.count + 1
   };
+  let ID = convert[message.author.username].number
    
-  let curxp = xp[message.author.tag].xp;
-  let curlvl = xp[message.author.tag].level;
-  xp[message.author.tag].xp = curxp + xpAdd
-  let nxtLvl= xp[message.author.tag].level*300;
-  if(nxtLvl <= xp[message.author.tag].xp){
-    xp[message.author.tag].level = curlvl + 1
+  let curxp = xp[ID].xp;
+  let curlvl = xp[ID].level;
+  xp[ID].xp = curxp + xpAdd
+  let nxtLvl= xp[ID].level*300;
+  if(nxtLvl <= xp[ID].xp){
+    xp[ID].level = curlvl + 1
     lvlUP = new Discord.RichEmbed()
-        .setTitle('Niveau '+xp[message.author.tag].level+' passé pour '+message.author.username+' !')
+        .setTitle('Niveau '+xp[ID].level+' passé pour '+message.author.username+' !')
       message.channel.send(lvlUP)
   }
+  fs.writeFile("./xp.json", JSON.stringify(xp), (err)=>
+      console.log(err))
+  fs.writeFile("./convert.json", JSON.stringify(convert), (err)=>
+      console.log(err))
+
  	if (message.content.startsWith(prefix)) {
    if(message.channel.id != '536202755312713749' && message.channel.id != '536963087543304232' && message.channel.id != '536789464068915222'){
     return console.log('check !')
    }
- 	 
+ 	 if(message.content === prefix +'lvl'){
+ 	 	message.channel.send(message.author.username + ', Vous avez '+xp[ID].xp+'xp /'+xp[ID].level*300+' au niveau '+xp[ID].level)
+ 	 }
      if(message.content.startsWith('!xp')){
+
     let args = message.content.split(' ')
     let role = message.guild.roles.find(role => role.name === 'Professeur')
       let role2 = message.guild.roles.find(role => role.name === 'Modérateur')
       if(message.member.roles.has(role.id) || message.member.roles.has(role2.id)){
-        if(args[1]==='reset'){
-          let y=args[2].split('&')
-          if(!xp[y]){
-              message.reply("Le nom saisis n'est pas valide. N'oubliez pas de remplacer les epace par des "+'"&"'+' .')
-          }
-          else{
-            xp[y.join(' ')] = {
-            xp : 0,
-            level : 1
+      	if(args[1] === 'list'){
+      	    while (compteur < xp.count){
+      	    	message.channel.send(xp[compteur].username+" : xp = "+xp[compteur].xp+" niveau = "+xp[compteur].level)
+      	    	compteur++
+      	    }
+      	}      		
+      	
 
-          }
-          message.channel.send(y+" n'a plus d'xp :cry:")
-    }
-        }
-      }
-    if(args[1] === 'show'){
-      let x = args[2].split('&')
-      let y = x.join(' ')
-      if(!xp[y]){
-        message.reply("Le nom que vous avez saisis n'est pas valide. N'oubliez pas de remplacer les espaces par des "+'"&"'+". ")
 
-      }else{
-        message.channel.send(y+' a '+xp[y].xp+"/"+300*xp[y].level+' xp au niveau '+xp[y].level+' !')
-      }
 
     }
   }
@@ -102,8 +108,8 @@ bot.on('message', function(message){
       	  .addField('!event <message>','notifie tout les membres présents avec le massage écrit en gras et souligné (utilisable uniquement par les professeur et les modérateurs)' )
  	  	    .addField("!salons","Vous permet de voir les utilités des salons et catégories")
  	  	    .addField('!warn <pseudo>','Avertie un utilisateur de sa mauvaise conduite (résérvé au Modérateurs, Administrateurs et Professeurs)')
-          .addField("!xp show <tag>","Permet d'afficher l'xp et le niveau du joueur à qui appartient le tag. Il faut remplacer les espaces par des "+'"&"'+". ")
-          .addField("!xp reset <tag>","Permet de supprimer l'xp et les niveaux d'une personne. Il faut remplecer les especes par des "+'"&"'+". ")
+          .addField("!lvl","Permet d'afficher ton xp et ton niveau")
+          
  	 	return message.channel.send(embed)
  	 	
  	 }
@@ -182,5 +188,7 @@ bot.on('message', function(message){
  }
  fs.writeFile("./xp.json", JSON.stringify(xp), (err)=>
       console.log(err))
+ fs.writeFile("./convert.json", JSON.stringify(convert), (err)=>
+      console.log(err))
  })
- bot.login(process.env.TOKEN) 	
+ bot.login("NTMyNDM2MzQ5MTM1ODgwMTkz.XXzKdw.OlttcOqhRQUjAF7VNCGboW2QcVo") 	
