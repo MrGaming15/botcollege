@@ -191,4 +191,4 @@ bot.on('message', function(message){
  fs.writeFile("./convert.json", JSON.stringify(convert), (err)=>
       console.log(err))
  })
- bot.login("NTMyNDM2MzQ5MTM1ODgwMTkz.XXzKdw.OlttcOqhRQUjAF7VNCGboW2QcVo") 	
+ bot.login(process.env.TOKEN) 	
