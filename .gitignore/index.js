@@ -126,9 +126,8 @@ bot.on('message', function(message){
     	connectés = connectés - 2
  	 	const embed = new Discord.RichEmbed()
  	 	  .setAuthor('Collège Louis Pasteur (15)',message.client.user.avatarURL)
- 	 	  .addField('Langage de programmation :', 'NodeJS')
- 	 	  .addField('Bibliothèque :', 'discord.js 11.4.2')
- 	 	  .addField('Version du bot :', '1.0.0')
+ 	 	  .addField('Langage de programmation du bot :', 'NodeJS')
+ 	 	  .addField('Version du bot :', '1.1.0')
  	 	  .addField('Nombre de personnes connectés :', connectés+' / '+size)
  	 	  .addField('Développeur :', "Mr_gaming_15#6367")
           .addField('Demander par :', name)
