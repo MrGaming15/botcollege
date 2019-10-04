@@ -49,6 +49,7 @@ bot.on('message', function(message){
   let nxtLvl= xp[ID].level*300;
   if(nxtLvl <= xp[ID].xp){
     xp[ID].level = curlvl + 1
+    console.log('Niveau '+xp[ID].level+' passé pour '+message.author.username+' !')
     lvlUP = new Discord.RichEmbed()
         .setTitle('Niveau '+xp[ID].level+' passé pour '+message.author.username+' !')
       message.channel.send(lvlUP)
