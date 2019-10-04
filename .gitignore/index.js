@@ -22,9 +22,9 @@ bot.on('guildMemberAdd', function(member){
 })
 bot.on('message', function(message){
   if (!message.guild)return;
-  if(message.author.tag === 'dabBot#0563' || message.author.tag === 'Pasteur Bot#6999') return;
+  if(message.author.tag === 'Groovy#7254' || message.author.tag === 'Pasteur Bot#6999') return;
   xpAdd = Math.floor(Math.random()*7)+8;
-  console.log(xpAdd);
+  console.log(message.author.username+' : +'+xpAdd);
   if(!xp.count){
   	xp.count = 0
   }
