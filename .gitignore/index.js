@@ -150,7 +150,7 @@ bot.on('message', function(message){
     }
     chiffrecesar(txt,decalage)
    }
-   if(content.startsWith(prefix+'decesar')){
+   if(message.content.startsWith(prefix+'decesar')){
     args= message.content.split(' ')
     var decalage = args[1]
     var txt = ""
