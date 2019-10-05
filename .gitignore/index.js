@@ -33,7 +33,7 @@ function dechiffrecesar(txt,decalage){
   var alpha
   var idx
   var chiffre = ""
-  decalage -= 26
+  decalage = 26-decalage
   txt = txt.toUpperCase()
   var Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
   k=parseInt(decalage)
