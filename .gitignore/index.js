@@ -5,23 +5,7 @@ const fs = require('fs')
 let xp = require('./xp.json')
 let convert = require('./convert.json')
 let compteur = 0
-
-bot.on('ready', function (){
-  console.log("I'm ready !")
-	bot.user.setActivity('!help', { type: 'LISTENING' })
-  .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : 'none'}`))
-  .catch(console.error);
-	//bot.user.setAvatar('./avatar.png')
-  //.then(console.log('Avatar appliqué avec succés !'))   
-  //.catch(console.error)
-  })
-bot.on('guildMemberAdd', function(member){
-	member.createDM().then(function (channel){
-		return channel.send('Bienvenue sur le serveur '+ member.displayName)
-	})
-})
-bot.on('message', function(message){
-  function chiffrecesar(txt,decalage){
+function chiffrecesar(txt,decalage){
    var alpha
    var idx
    var chiffre = ""
@@ -43,8 +27,8 @@ bot.on('message', function(message){
          }
   
      }
-  
-   return message.reply("Voici votre phrase chiffré : "+chiffre)}
+	
+   global chiffre
 function dechiffrecesar(txt,decalage){
   var alpha
   var idx
@@ -68,7 +52,23 @@ function dechiffrecesar(txt,decalage){
       }
   
   }
-  return message.reply("Voici votre phrase déchiffré : "+chiffre)}
+  global chiffre
+bot.on('ready', function (){
+  console.log("I'm ready !")
+	bot.user.setActivity('!help', { type: 'LISTENING' })
+  .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : 'none'}`))
+  .catch(console.error);
+	//bot.user.setAvatar('./avatar.png')
+  //.then(console.log('Avatar appliqué avec succés !'))   
+  //.catch(console.error)
+  })
+bot.on('guildMemberAdd', function(member){
+	member.createDM().then(function (channel){
+		return channel.send('Bienvenue sur le serveur '+ member.displayName)
+	})
+})
+bot.on('message', function(message){
+  
   if (!message.guild)return;
   if(message.author.tag === 'Groovy#7254' || message.author.tag === 'Pasteur Bot#6999') return;
   xpAdd = Math.floor(Math.random()*7)+8;
@@ -148,6 +148,7 @@ function dechiffrecesar(txt,decalage){
       txt += args[count]+" "
     }
     chiffrecesar(txt,decalage)
+    message.reply(chiffre)
    }
    if(message.content.startsWith(prefix+'decesar')){
     args= message.content.split(' ')
@@ -158,6 +159,7 @@ function dechiffrecesar(txt,decalage){
       txt += args[count]+" "
     }
     dechiffrecesar(txt,decalage)
+    message.reply(chiffre)
    }
  	 if (message.content === prefix+'ping'){
  		let ping = message.author.client.ping
