@@ -140,7 +140,7 @@ bot.on('message', function(message){
  		
 
  		}
-   if(content.startsWith(prefix+'chcesar')){
+   if(message.content.startsWith(prefix+'chcesar')){
     args= message.content.split(' ')
     var decalage = args[1]
     var txt = ""
