@@ -5,31 +5,6 @@ const fs = require('fs')
 let xp = require('./xp.json')
 let convert = require('./convert.json')
 let compteur = 0
-function dechiffrecesar(txt,decalage){
-  var alpha
-  var idx
-  var chiffre = ""
-  decalage = 26-decalage
-  txt = txt.toUpperCase()
-  var Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  k=parseInt(decalage)
-  while (k<0){k+=26}
-   while(k>25){k-+26}
-  for(var count = 0; count < txt.length; count++) {
-      alpha = txt[count]
-      if (alpha == " "){
-          chiffre+=" "
-      }
-      else{
-          idx = Alphabet.indexOf(alpha);
-          if(idx > -1){
-              chiffre += Alphabet[idx+k]
-          }
-      }
-  
-  }
-  return chiffre
-
 bot.on('ready', function (){
   console.log("I'm ready !")
   bot.user.setActivity('!help', { type: 'LISTENING' })
@@ -104,9 +79,6 @@ bot.on('message', function(message){
             }
         }         
         
-
-
-
     }
   }
      if(message.content.startsWith(prefix+"aide")) {
