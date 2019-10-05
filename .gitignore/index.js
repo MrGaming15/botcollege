@@ -28,7 +28,7 @@ function chiffrecesar(txt,decalage){
   
     }
   
-  message.reply("Voici votre phrase chiffré : "+chiffre)}
+  return message.reply("Voici votre phrase chiffré : "+chiffre)}
 function dechiffrecesar(txt,decalage){
   var alpha
   var idx
@@ -52,7 +52,7 @@ function dechiffrecesar(txt,decalage){
       }
   
   }
-  message.reply("Voici votre phrase déchiffré : "+chiffre)}
+  return message.reply("Voici votre phrase déchiffré : "+chiffre)}
 bot.on('ready', function (){
   console.log("I'm ready !")
 	bot.user.setActivity('!help', { type: 'LISTENING' })
