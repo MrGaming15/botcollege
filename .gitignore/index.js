@@ -171,6 +171,8 @@ bot.on('message', function(message){
           .addField("!salons","Vous permet de voir les utilités des salons et catégories")
           .addField('!warn <pseudo>','Avertie un utilisateur de sa mauvaise conduite (résérvé au Modérateurs, Administrateurs et Professeurs)')
           .addField("!lvl","Permet d'afficher ton xp et ton niveau")
+          .addField("!chcesar <décalage> <phrase à chiffrer>","Chiffre la phrase en décalant chaque lettre du nombre choisis")
+          .addField("!decesar <décalage> <phrase à chiffrer>","Déhiffre la phrase en décalant chaque lettre du nombre choisis")
           
     return message.channel.send(embed)
     
