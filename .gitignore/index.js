@@ -30,11 +30,9 @@ function chiffrecesar(txt,decalage){
   
   console.log(chiffre)}
 function dechiffrecesar(txt,decalage){
-  var txt = prompt("Message à chiffrer");
   var alpha
   var idx
   var chiffre = ""
-  var decalage = prompt('Décalage')
   decalage -= 26
   txt = txt.toUpperCase()
   var Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
