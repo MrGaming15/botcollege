@@ -5,30 +5,46 @@ const fs = require('fs')
 let xp = require('./xp.json')
 let convert = require('./convert.json')
 let compteur = 0
-function chiffrecesar(txt,decalage){
-  var alpha
-  var idx
-  var chiffre = ""
-  txt = txt.toUpperCase()
-  var Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  k=parseInt(decalage)
-  while (k<0){k+=26}
-   while(k>25){k-+26}
-  for(var count = 0; count < txt.length; count++) {
-      alpha = txt[count]
-      if (alpha == " "){
-          chiffre+=" "
-      }
-      else{
-          idx = Alphabet.indexOf(alpha);
-         if(idx > -1){
-              chiffre += Alphabet[idx+k]
-            }
-        }
+
+bot.on('ready', function (){
+  console.log("I'm ready !")
+	bot.user.setActivity('!help', { type: 'LISTENING' })
+  .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : 'none'}`))
+  .catch(console.error);
+	//bot.user.setAvatar('./avatar.png')
+  //.then(console.log('Avatar appliqué avec succés !'))   
+  //.catch(console.error)
+  })
+bot.on('guildMemberAdd', function(member){
+	member.createDM().then(function (channel){
+		return channel.send('Bienvenue sur le serveur '+ member.displayName)
+	})
+})
+bot.on('message', function(message){
+  function chiffrecesar(txt,decalage){
+   var alpha
+   var idx
+   var chiffre = ""
+   txt = txt.toUpperCase()
+   var Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
+   k=parseInt(decalage)
+   while (k<0){k+=26}
+    while(k>25){k-+26}
+   for(var count = 0; count < txt.length; count++) {
+       alpha = txt[count]
+       if (alpha == " "){
+           chiffre+=" "
+       }
+       else{
+           idx = Alphabet.indexOf(alpha);
+          if(idx > -1){
+               chiffre += Alphabet[idx+k]
+             }
+         }
   
-    }
+     }
   
-  return message.reply("Voici votre phrase chiffré : "+chiffre)}
+   return message.reply("Voici votre phrase chiffré : "+chiffre)}
 function dechiffrecesar(txt,decalage){
   var alpha
   var idx
@@ -53,21 +69,6 @@ function dechiffrecesar(txt,decalage){
   
   }
   return message.reply("Voici votre phrase déchiffré : "+chiffre)}
-bot.on('ready', function (){
-  console.log("I'm ready !")
-	bot.user.setActivity('!help', { type: 'LISTENING' })
-  .then(presence => console.log(`Activity set to ${presence.game ? presence.game.name : 'none'}`))
-  .catch(console.error);
-	//bot.user.setAvatar('./avatar.png')
-  //.then(console.log('Avatar appliqué avec succés !'))   
-  //.catch(console.error)
-  })
-bot.on('guildMemberAdd', function(member){
-	member.createDM().then(function (channel){
-		return channel.send('Bienvenue sur le serveur '+ member.displayName)
-	})
-})
-bot.on('message', function(message){
   if (!message.guild)return;
   if(message.author.tag === 'Groovy#7254' || message.author.tag === 'Pasteur Bot#6999') return;
   xpAdd = Math.floor(Math.random()*7)+8;
