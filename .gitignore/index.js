@@ -28,7 +28,7 @@ function chiffrecesar(txt,decalage){
   
      }
 	
-   global chiffre
+   return chiffre
 function dechiffrecesar(txt,decalage){
   var alpha
   var idx
@@ -52,7 +52,7 @@ function dechiffrecesar(txt,decalage){
       }
   
   }
-  global chiffre
+  return chiffre
 bot.on('ready', function (){
   console.log("I'm ready !")
 	bot.user.setActivity('!help', { type: 'LISTENING' })
