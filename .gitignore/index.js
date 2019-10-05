@@ -5,30 +5,6 @@ const fs = require('fs')
 let xp = require('./xp.json')
 let convert = require('./convert.json')
 let compteur = 0
-/*function chiffrecesar(txt,decalage){
-   var alpha
-   var idx
-   var chiffre = ""
-   txt = txt.toUpperCase()
-   var Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
-   k=parseInt(decalage)
-   while (k<0){k+=26}
-    while(k>25){k-+26}
-   for(var count = 0; count < txt.length; count++) {
-       alpha = txt[count]
-       if (alpha == " "){
-           chiffre+=" "
-       }
-       else{
-           idx = Alphabet.indexOf(alpha);
-          if(idx > -1){
-               chiffre += Alphabet[idx+k]
-             }
-         }
-  
-     }
-  
-   return chiffre
 function dechiffrecesar(txt,decalage){
   var alpha
   var idx
@@ -53,7 +29,7 @@ function dechiffrecesar(txt,decalage){
   
   }
   return chiffre
-*/
+
 bot.on('ready', function (){
   console.log("I'm ready !")
   bot.user.setActivity('!help', { type: 'LISTENING' })
@@ -139,7 +115,7 @@ bot.on('message', function(message){
         return message.channel.send("@here , "+ message.author.username+" a besoin d'aide sur ce sujet : "+args.join(' '));
     
 
-    }/*
+    }
    if(message.content.startsWith(prefix+'chcesar')){
     args= message.content.split(' ')
     var decalage = args[1]
@@ -148,8 +124,29 @@ bot.on('message', function(message){
     for(var count = 2; count<arraylength; count++){
       txt += args[count]+" "
     }
-    chiffrecesar(txt,decalage)
-    message.reply(chiffre)
+    var alpha
+   var idx
+   var chiffre = ""
+   txt = txt.toUpperCase()
+   var Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
+   k=parseInt(decalage)
+   while (k<0){k+=26}
+    while(k>25){k-+26}
+   for(var count = 0; count < txt.length; count++) {
+       alpha = txt[count]
+       if (alpha == " "){
+           chiffre+=" "
+       }
+       else{
+           idx = Alphabet.indexOf(alpha);
+          if(idx > -1){
+               chiffre += Alphabet[idx+k]
+             }
+         }
+  
+     }
+  
+   message.reply(chiffre)
    }
    if(message.content.startsWith(prefix+'decesar')){
     args= message.content.split(' ')
@@ -159,7 +156,28 @@ bot.on('message', function(message){
     for(var count = 2; count<arraylength; count++){
       txt += args[count]+" "
     }
-    dechiffrecesar(txt,decalage)
+    var alpha
+  var idx
+  var chiffre = ""
+  decalage = 26-decalage
+  txt = txt.toUpperCase()
+  var Alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  k=parseInt(decalage)
+  while (k<0){k+=26}
+   while(k>25){k-+26}
+  for(var count = 0; count < txt.length; count++) {
+      alpha = txt[count]
+      if (alpha == " "){
+          chiffre+=" "
+      }
+      else{
+          idx = Alphabet.indexOf(alpha);
+          if(idx > -1){
+              chiffre += Alphabet[idx+k]
+          }
+      }
+  
+  }
     message.reply(chiffre)
    }
    if (message.content === prefix+'ping'){
@@ -167,7 +185,7 @@ bot.on('message', function(message){
     return message.channel.send('Votre ping est de '+ping+'ms')
     
 
-    }*/
+    }
    if (message.content === prefix+'help'){
     const embed = new Discord.RichEmbed()
       .setAuthor('Collège Louis Pasteur (15)',message.client.user.avatarURL)
