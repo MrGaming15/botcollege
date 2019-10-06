@@ -117,8 +117,9 @@ bot.on('message', function(message){
          }
   
      }
-  
+   message.delete()
    message.reply(chiffre)
+   
    }
    if(message.content.startsWith(prefix+'decesar')){
     args= message.content.split(' ')
@@ -149,7 +150,8 @@ bot.on('message', function(message){
           }
       }
   
-  }
+  } 
+    message.delete()
     message.reply(chiffre)
    }
    if (message.content === prefix+'ping'){
