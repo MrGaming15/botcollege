@@ -73,9 +73,11 @@ bot.on('message', function(message){
       let role2 = message.guild.roles.find(role => role.name === 'Modérateur')
       if(message.member.roles.has(role.id) || message.member.roles.has(role2.id)){
         if(args[1] === 'list'){
+            console.log(xp)
             while (compteur < xp.count){
               message.channel.send(xp[compteur].username+" : xp = "+xp[compteur].xp+" niveau = "+xp[compteur].level)
               compteur++
+            
             }
         }         
         
