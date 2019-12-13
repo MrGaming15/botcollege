@@ -4,6 +4,6 @@
   "dependencies": {
     "discord.js": "^11.4.2",
     "fs": "0.0.1-security",
-    "npm": "^6.8.0"
+    "npm": "^6.13.4"
   }
 }
