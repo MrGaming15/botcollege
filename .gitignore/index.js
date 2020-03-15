@@ -74,11 +74,9 @@ bot.on('message', function(message){
       if(message.member.roles.has(role.id) || message.member.roles.has(role2.id)){
         if(args[1] === 'list'){
             console.log(xp)
-            while (compteur < xp.count){
-              message.channel.send(xp[compteur].username+" : xp = "+xp[compteur].xp+" niveau = "+xp[compteur].level)
-              compteur++
-            
-            }
+            message.channel.send(xp)
+            console.log(convert)
+            message.channel.send(convert)
         }         
         
     }
