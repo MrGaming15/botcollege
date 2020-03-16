@@ -73,10 +73,10 @@ bot.on('message', function(message){
       let role2 = message.guild.roles.find(role => role.name === 'Modérateur')
       if(message.member.roles.has(role.id) || message.member.roles.has(role2.id)){
         if(args[1] === 'list'){
+            console.log('XP')
             console.log(xp)
-            message.channel.send(xp)
+            console.log('CONVERT')
             console.log(convert)
-            message.channel.send(convert)
         }         
         
     }
