@@ -174,6 +174,8 @@ bot.on('message', function(message){
           .addField("!lvl","Permet d'afficher ton xp et ton niveau")
           .addField("!chcesar <décalage> <phrase à chiffrer>","Chiffre la phrase en décalant chaque lettre du nombre choisis")
           .addField("!decesar <décalage> <phrase à chiffrer>","Déhiffre la phrase en décalant chaque lettre du nombre choisis")
+          .addField('!deconf',"Affiche la date , le temps avant le déconfinement en secondes, minutes, heures et jours et en secondes")
+          .addField('!attestation',"Envoie le lien du formulaire en ligne pour faire son attestation de déplacement dérogatoire et un exemplaire PDF")
           
     return message.channel.send(embed)
     
@@ -181,6 +183,56 @@ bot.on('message', function(message){
    if(message.content === prefix+'ressources'){
     return message.channel.send('Voici le lien vers les ressources : https://bit.ly/2Me3Mn6')
    
+   }
+   if(message.content === prefix+'deconf'){
+   	const embed = new Discord.RichEmbed()
+   	var time = new Date()
+	var f = {
+	  "1" : "Janvier",
+	  "2" : "Février",
+	  "3" : "Mars",
+	  "4" : "Avril",
+	  "5" : "Mai",
+	  "6" : "Juin",
+	  "7" : "Juillet",
+	  "8" : "Août",
+	  "9" : "Septembre",
+	  "10": "Octobre",
+	  "11": "Novembre",
+	  "12": "Décembre",
+	};
+	let j = time.getDate()
+	let mo = time.getMonth()+1
+	let a = time.getFullYear()
+	let h = time.getHours()
+	let mi = time.getMinutes()
+	let s = time.getSeconds()
+	if(mo == 4 && a == 2020){
+		j = 30-j+11-1
+	}else{
+		if(mo == 5 && a == 2020){
+			j = j+11-1
+		}else{
+			message.channel.send("Le confinement est déjà fini !")
+		}
+	}
+	fins= 60-s
+	finm= 60-mi * 60
+	finh= 24-h * 60**2
+	finj = j * 60**2*24
+	fin = fins+finm+finh+finj
+	console.log("\nCe qui représente "+fin+" secondes")
+	const embed1 = new Discord.RichEmbed()
+		.setAuthor('Collège Louis Pasteur (15)',message.client.user.avatarURL)
+		.addField('Date actuelle :',j+" "+f[mo]+" "+a+" et il est "+h+"h"+mi+" et "+s+"s")
+		.addField('Fin du confinement dans (secondes/minutes/heures/jours):',(j-1)+" jour(s) "+(24-h-1)+" heure(s) "+(60-mi-1)+" minute(s) "+(60-s)+" seconde(s)")
+		.addField('Fin du confinement dans (secondes):',fin+" secondes")
+	message.channel.send(embed1)
+
+
+   }if(message.content === prefix+'attestation'){
+   	message.channel.send("Et voici votre attestation de déplacement dérogatoire au format pdf (à imprimer puis remplir): ",{ files: ["./attestation.pdf"] })
+   	message.channel.send("Voici le lien pour faire une attestation en ligne : https://media.interieur.gouv.fr/deplacement-covid-19/")
    }
    if(message.content === prefix+'infos'){
     let URL = message.author.avatarURL
@@ -194,7 +246,7 @@ bot.on('message', function(message){
       .addField('Langage de programmation du bot :', 'NodeJS')
       .addField('Version du bot :', '1.1.0')
       .addField('Nombre de personnes connectés :', connectés+' / '+size)
-      .addField('Développeur :', "Mr_gaming_15#6367")
+      .addField('Développeur :', "PREVITALI GASC Mattéo#6367")
           .addField('Demander par :', name)
       .setColor('#00ffff')
     return message.channel.send(embed)
@@ -255,4 +307,5 @@ bot.on('message', function(message){
  fs.writeFile("./convert.json", JSON.stringify(convert), (err)=>
       console.log(err))
  })
- bot.login(process.env.TOKEN)   
+ //bot.login(process.env.TOKEN)
+ bot.login('NTMyNDM2MzQ5MTM1ODgwMTkz.XqVBDA.Ly6NmkOmq_4M7gusUsxJ-YIbQ78')
