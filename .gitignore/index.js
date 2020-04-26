@@ -204,7 +204,7 @@ bot.on('message', function(message){
 	let j = time.getDate()
 	let mo = time.getMonth()+1
 	let a = time.getFullYear()
-	let h = time.getHours()
+	let h = time.getHours()+2
 	let mi = time.getMinutes()
 	let s = time.getSeconds()
 	if(mo == 4 && a == 2020){
