@@ -301,48 +301,7 @@ bot.on('message', function(message){
         message.reply("Vous n'avez pas la permission d'effectuer cette commande")
         }
     }
-    if(message.content.startsWith('!play')){
-    var arg
-
-  
-    let args = message.content.split(" ")
-    let m = 1
-    let x = ""
-    while (m !== args.length){
-      x+=args[m]+" "
-      m+=1
-    }
-    
-    
-    let voiceChannel = message.guild.channels
-      .filter(function(channel){return channel.type === 'voice'})
-      .first()
-    yts( x, function ( err, r ) {
-          if ( err ) throw err
-         
-          
-          
-          arg = r.videos[0].url
-          
-        } )
-    voiceChannel
-      .join()
-      .then(function (connection){
-        let stream = yt(arg)
-        stream.on('error', function(error){
-          message.reply("Je ne peux pas lire la vidéo")
-          connection.disconnect()
-          console.log(error)
-        })
-        connection
-          .play(stream)
-          .on('end', function(){
-          connection.disconnect()
-          message.channel.send("Palying ! :notes:")
-        })
-        
-        
-      })}
+   
     
  
   
