@@ -1,9 +1,11 @@
 const Discord = require('discord.js')
 const bot = new Discord.Client()
-let prefix = '!'
 const fs = require('fs')
 let xp = require('./xp.json')
 let convert = require('./convert.json')
+const yts = require('yt-search')
+const yt = require('ytdl-core')
+let prefix = '!'
 let compteur = 0
 bot.on('ready', function (){
   console.log("I'm ready !")
@@ -204,7 +206,7 @@ bot.on('message', function(message){
 	let j = time.getDate()
 	let mo = time.getMonth()+1
 	let a = time.getFullYear()
-	let h = time.getHours()+2
+	let h = time.getHours()
 	let mi = time.getMinutes()
 	let s = time.getSeconds()
 	if(mo == 4 && a == 2020){
@@ -299,6 +301,49 @@ bot.on('message', function(message){
         message.reply("Vous n'avez pas la permission d'effectuer cette commande")
         }
     }
+    if(message.content.startsWith('!play')){
+    var arg
+
+  
+    let args = message.content.split(" ")
+    let m = 1
+    let x = ""
+    while (m !== args.length){
+      x+=args[m]+" "
+      m+=1
+    }
+    
+    
+    let voiceChannel = message.guild.channels
+      .filter(function(channel){return channel.type === 'voice'})
+      .first()
+    yts( x, function ( err, r ) {
+          if ( err ) throw err
+         
+          
+          
+          arg = r.videos[0].url
+          
+        } )
+    voiceChannel
+      .join()
+      .then(function (connection){
+        let stream = yt(arg)
+        stream.on('error', function(error){
+          message.reply("Je ne peux pas lire la vidéo")
+          connection.disconnect()
+          console.log(error)
+        })
+        connection
+          .play(stream)
+          .on('end', function(){
+          connection.disconnect()
+          message.channel.send("Palying ! :notes:")
+        })
+        
+        
+      })}
+    
  
   
  }
@@ -308,3 +353,4 @@ bot.on('message', function(message){
       console.log(err))
  })
  bot.login(process.env.TOKEN)
+ 
